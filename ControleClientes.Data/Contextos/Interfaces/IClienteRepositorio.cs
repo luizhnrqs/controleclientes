@@ -9,5 +9,8 @@ namespace ControleClientes.Data.Contextos.Interfaces
 {
     public interface IClienteRepositorio : IRepositorioBase<Cliente>
     {
+        IEnumerable<Cliente> BuscarClientePorNome(string nome);
+        Cliente BuscarClientePorCPF(string CPF);
+        Cliente BuscarClientePorEmail(string email);
     }
 }

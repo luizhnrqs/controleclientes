@@ -41,10 +41,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgenciaApp.cs" />
+    <Compile Include="BaseApp.cs" />
+    <Compile Include="ClienteApp.cs" />
+    <Compile Include="ContaApp.cs" />
+    <Compile Include="Interfaces\IAgenciaApp.cs" />
+    <Compile Include="Interfaces\IBaseApp.cs" />
+    <Compile Include="Interfaces\IClienteApp.cs" />
+    <Compile Include="Interfaces\IContaApp.cs" />
+    <Compile Include="Interfaces\ITipoContaApp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TipoContaApp.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Interfaces\" />
+    <ProjectReference Include="..\ControleClientes.Data\ControleClientes.Data.csproj">
+      <Project>{9E8CC28D-14B2-4516-8C6B-4A117BAA6935}</Project>
+      <Name>ControleClientes.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ControleClientes.Dominio\ControleClientes.Dominio.csproj">
+      <Project>{EB4B7D6D-90D2-40E3-8639-B713CB5F50E1}</Project>
+      <Name>ControleClientes.Dominio</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -17,5 +17,10 @@ namespace ControleClientes.Data.Contextos.Repositorios
         {
             _unit = unit;
         }
+
+        public IEnumerable<Agencia> BuscarAgenciaPorNome(string nome)
+        {
+            return _unit.Contexto.Set<Agencia>().Where(x => x.NomeAgencia == nome);
+        }
     }
 }

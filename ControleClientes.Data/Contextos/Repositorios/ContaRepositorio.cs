@@ -17,5 +17,26 @@ namespace ControleClientes.Data.Contextos.Repositorios
         {
             _unit = unit;
         }
+
+        public Conta BuscarContaPorNumeroConta(int numeroConta)
+        {
+            return _unit.Contexto.Set<Conta>().Where(x => x.NumeroConta == numeroConta).FirstOrDefault();
+        }
+
+        public void CreditarSaldo(Conta conta, double valor)
+        {
+            Conta _conta = _unit.Contexto.Set<Conta>().Where(x => x.NumeroConta == conta.NumeroConta).FirstOrDefault();
+            _conta.Saldo -= valor;
+
+            _unit.Save();
+        }
+
+        public void DebitarSaldo(Conta conta, double valor)
+        {
+            Conta _conta = _unit.Contexto.Set<Conta>().Where(x => x.NumeroConta == conta.NumeroConta).FirstOrDefault();
+            _conta.Saldo += valor;
+
+            _unit.Save();
+        }
     }
 }

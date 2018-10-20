@@ -17,5 +17,20 @@ namespace ControleClientes.Data.Contextos.Repositorios
         {
             _unit = unit;
         }
+
+        public Cliente BuscarClientePorCPF(string CPF)
+        {
+            return _unit.Contexto.Set<Cliente>().Where(x => x.CPF == CPF && x.Ativo).FirstOrDefault();
+        }
+
+        public Cliente BuscarClientePorEmail(string email)
+        {
+            return _unit.Contexto.Set<Cliente>().Where(x => x.Email == email && x.Ativo).FirstOrDefault();
+        }
+
+        public IEnumerable<Cliente> BuscarClientePorNome(string nome)
+        {
+            return _unit.Contexto.Set<Cliente>().Where(x => x.Nome.Contains(nome) && x.Ativo);
+        }
     }
 }

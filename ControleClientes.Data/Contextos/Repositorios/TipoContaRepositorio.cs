@@ -17,5 +17,10 @@ namespace ControleClientes.Data.Contextos.Repositorios
         {
             _unit = unit;
         }
+
+        public TipoConta BuscarTipoContaPorNome(string nome)
+        {
+            return _unit.Contexto.Set<TipoConta>().Where(x => x.NomeTipoConta == nome).FirstOrDefault();
+        }
     }
 }

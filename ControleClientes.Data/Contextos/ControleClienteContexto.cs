@@ -28,9 +28,9 @@ namespace ControleClientes.Data.Contextos
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
 
             modelBuilder.Configurations.Add(new AgenciaMap());
-            //modelBuilder.Configurations.Add(new ClienteMap());
-            //modelBuilder.Configurations.Add(new ContaMap());
-            //modelBuilder.Configurations.Add(new TipoContaMap());
+            modelBuilder.Configurations.Add(new ClienteMap());
+            modelBuilder.Configurations.Add(new ContaMap());
+            modelBuilder.Configurations.Add(new TipoContaMap());
         }
     }
 }

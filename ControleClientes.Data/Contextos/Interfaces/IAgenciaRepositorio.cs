@@ -9,5 +9,6 @@ namespace ControleClientes.Data.Contextos.Interfaces
 {
     public interface IAgenciaRepositorio : IRepositorioBase<Agencia>
     {
+        IEnumerable<Agencia> BuscarAgenciaPorNome(string nome);
     }
 }

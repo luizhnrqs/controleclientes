@@ -16,7 +16,7 @@ namespace ControleClientes.Dominio.Entidades
         public string SobreNome { get; set; }
         public string Email { get; set; }
         public bool Ativo { get; set; }
-        public decimal CPF { get; set; }
+        public string CPF { get; set; }
         public virtual ICollection<Conta> Contas { get; set; }
     }
 }

@@ -9,5 +9,6 @@ namespace ControleClientes.Data.Contextos.Interfaces
 {
     public interface ITipoContaRepositorio : IRepositorioBase<TipoConta>
     {
+        TipoConta BuscarTipoContaPorNome(string nome);
     }
 }
