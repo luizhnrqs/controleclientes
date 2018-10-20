@@ -48,17 +48,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Contextos\Interfaces\IAgenciaRepositorio.cs" />
+    <Compile Include="Contextos\Interfaces\IClienteRepositorio.cs" />
+    <Compile Include="Contextos\Interfaces\IContaRepositorio.cs" />
+    <Compile Include="Contextos\Interfaces\IRepositorioBase.cs" />
+    <Compile Include="Contextos\Interfaces\ITipoContaRepositorio.cs" />
+    <Compile Include="Contextos\Interfaces\IUnitOfWork.cs" />
+    <Compile Include="Contextos\Mapeamento\AgenciaMap.cs" />
+    <Compile Include="Contextos\Mapeamento\ClienteMap.cs" />
+    <Compile Include="Contextos\Mapeamento\ContaMap.cs" />
+    <Compile Include="Contextos\ControleClienteContexto.cs" />
+    <Compile Include="Contextos\Mapeamento\TipoContaMap.cs" />
+    <Compile Include="Contextos\Repositorios\AgenciaRepositorio.cs" />
+    <Compile Include="Contextos\Repositorios\ClienteRepositorio.cs" />
+    <Compile Include="Contextos\Repositorios\ContaRepositorio.cs" />
+    <Compile Include="Contextos\Repositorios\RepositorioBase.cs" />
+    <Compile Include="Contextos\Repositorios\TipoContaRepositorio.cs" />
+    <Compile Include="Contextos\UnitOfWork.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Contextos\Interfaces\" />
-    <Folder Include="Contextos\Repositorios\" />
-    <Folder Include="Mapeamento\" />
+    <ProjectReference Include="..\ControleClientes.Dominio\ControleClientes.Dominio.csproj">
+      <Project>{EB4B7D6D-90D2-40E3-8639-B713CB5F50E1}</Project>
+      <Name>ControleClientes.Dominio</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
