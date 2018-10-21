@@ -9,5 +9,6 @@ namespace ControleClientes.Aplicacao.Interfaces
 {
     public interface IContaApp : IBaseApp<Conta>
     {
+        Conta BuscarPorNumeroConta(int numeroConta);
     }
 }

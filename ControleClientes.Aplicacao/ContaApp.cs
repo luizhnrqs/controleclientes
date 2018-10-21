@@ -18,5 +18,10 @@ namespace ControleClientes.Aplicacao
         {
             _repositorio = repositorio;
         }
+
+        public Conta BuscarPorNumeroConta(int numeroConta)
+        {
+            return _repositorio.BuscarPorNumeroConta(numeroConta);
+        }
     }
 }

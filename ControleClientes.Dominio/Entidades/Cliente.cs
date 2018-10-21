@@ -11,7 +11,7 @@ namespace ControleClientes.Dominio.Entidades
     {
         [Key]
         public int IdCliente { get; set; }
-        public string Nome { get => $"{PrimeiroNome.Trim()} {SobreNome.Trim()}"; }
+        public string Nome { get => $"{PrimeiroNome?.Trim()} {SobreNome?.Trim()}"; }
         public string PrimeiroNome { get; set; }
         public string SobreNome { get; set; }
         public string Email { get; set; }

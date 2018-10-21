@@ -7,7 +7,7 @@ namespace ControleClientes.Data.Contextos
     {
         public ContaMap()
         {
-            HasKey(x => new { x.IdConta, x.NumeroConta });
+            HasKey(x => x.IdConta);
 
             Property(x => x.IdAgencia)
                 .IsRequired();

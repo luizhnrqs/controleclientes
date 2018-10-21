@@ -15,7 +15,7 @@ namespace ControleClientes.Data.Contextos
             _contexto = contexto;
         }
 
-        public ControleClienteContexto Contexto => throw new NotImplementedException();
+        public ControleClienteContexto Contexto { get => _contexto; }
 
         public void Dispose()
         {

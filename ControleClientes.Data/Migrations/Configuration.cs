@@ -27,16 +27,16 @@ namespace ControleClientes.Data.Migrations
             contasLuiz.Add(new Conta() { IdConta = 2, IdAgencia = 1, IdTipoConta = 2, IdCliente = 1, NumeroConta = 223548, Saldo = 300 });
 
             List<Conta> contasSandra = new List<Conta>();
-            contasLuiz.Add(new Conta() { IdConta = 3, IdAgencia = 2, IdTipoConta = 3, IdCliente = 1, NumeroConta = 154896, Saldo = 300 });
-            contasLuiz.Add(new Conta() { IdConta = 4, IdAgencia = 1, IdTipoConta = 2, IdCliente = 1, NumeroConta = 354681, Saldo = 700 });
+            contasSandra.Add(new Conta() { IdConta = 3, IdAgencia = 2, IdTipoConta = 3, IdCliente = 2, NumeroConta = 154896, Saldo = 300 });
+            contasSandra.Add(new Conta() { IdConta = 4, IdAgencia = 1, IdTipoConta = 2, IdCliente = 2, NumeroConta = 354681, Saldo = 700 });
 
             List<Conta> contasMarcelo = new List<Conta>();
-            contasLuiz.Add(new Conta() { IdConta = 5, IdAgencia = 2, IdTipoConta = 1, IdCliente = 1, NumeroConta = 987951, Saldo = 500 });
-            contasLuiz.Add(new Conta() { IdConta = 6, IdAgencia = 2, IdTipoConta = 1, IdCliente = 1, NumeroConta = 112357, Saldo = 150 });
+            contasMarcelo.Add(new Conta() { IdConta = 5, IdAgencia = 2, IdTipoConta = 1, IdCliente = 3, NumeroConta = 987951, Saldo = 500 });
+            contasMarcelo.Add(new Conta() { IdConta = 6, IdAgencia = 2, IdTipoConta = 1, IdCliente = 3, NumeroConta = 112357, Saldo = 150 });
 
             List<Conta> contasWillian = new List<Conta>();
-            contasLuiz.Add(new Conta() { IdConta = 7, IdAgencia = 1, IdTipoConta = 3, IdCliente = 1, NumeroConta = 168574, Saldo = 350 });
-            contasLuiz.Add(new Conta() { IdConta = 8, IdAgencia = 2, IdTipoConta = 3, IdCliente = 1, NumeroConta = 135498, Saldo = 600 });
+            contasMarcelo.Add(new Conta() { IdConta = 7, IdAgencia = 1, IdTipoConta = 3, IdCliente = 4, NumeroConta = 168574, Saldo = 350 });
+            contasMarcelo.Add(new Conta() { IdConta = 8, IdAgencia = 2, IdTipoConta = 3, IdCliente = 4, NumeroConta = 135498, Saldo = 600 });
 
             context.TipoConta.AddOrUpdate(x => x.IdTipoConta, 
                     new TipoConta() { IdTipoConta = 1, NomeTipoConta = "Ouro" },
@@ -45,8 +45,8 @@ namespace ControleClientes.Data.Migrations
                 );
 
             context.Agencia.AddOrUpdate(x => x.IdAgencia,
-                new Agencia() { IdAgencia = 1, NomeAgencia = "Parque São Paulo" },
-                new Agencia() { IdAgencia = 2, NomeAgencia = "Interlagos" });
+                new Agencia() { IdAgencia = 1, NomeAgencia = "Parque São Paulo", Endereco = "Av. Pedro Álvares Cabral - Vila Mariana" },
+                new Agencia() { IdAgencia = 2, NomeAgencia = "Interlagos", Endereco = "Av. Sen. Teotônio Vilela, 261 - Interlagos" });
 
             context.Cliente.AddOrUpdate(x => x.IdCliente,
                 new Cliente() { IdCliente = 1, Ativo = true, PrimeiroNome = "Luiz Henrique", SobreNome = "Silva", CPF = "42167429800", Email = "henrique@email.com", Contas = contasLuiz },

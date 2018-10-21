@@ -30,7 +30,7 @@ namespace ControleClientes.Data.Contextos.Repositorios
 
         public IEnumerable<Cliente> BuscarClientePorNome(string nome)
         {
-            return _unit.Contexto.Set<Cliente>().Where(x => x.Nome.Contains(nome) && x.Ativo);
+            return _unit.Contexto.Set<Cliente>().Where(x => x.PrimeiroNome.Contains(nome) || x.SobreNome.Contains(nome) && x.Ativo);
         }
     }
 }

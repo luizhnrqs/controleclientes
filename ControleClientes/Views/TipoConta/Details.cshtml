@@ -1,0 +1,26 @@
+﻿@model ControleClientes.ViewModels.TipoContaViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalhes</h2>
+
+<div>
+    <h4>Tipo de Conta</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeTipoConta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomeTipoConta)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

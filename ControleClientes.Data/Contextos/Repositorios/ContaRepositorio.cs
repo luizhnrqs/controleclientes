@@ -18,7 +18,7 @@ namespace ControleClientes.Data.Contextos.Repositorios
             _unit = unit;
         }
 
-        public Conta BuscarContaPorNumeroConta(int numeroConta)
+        public Conta BuscarPorNumeroConta(int numeroConta)
         {
             return _unit.Contexto.Set<Conta>().Where(x => x.NumeroConta == numeroConta).FirstOrDefault();
         }
