@@ -10,7 +10,7 @@ namespace ControleClientes.Data.Contextos.Interfaces
     public interface IContaRepositorio : IRepositorioBase<Conta>
     {
         Conta BuscarPorNumeroConta(int numeroConta);
-        void DebitarSaldo(Conta conta, double valor);
-        void CreditarSaldo(Conta conta, double valor);
+        bool possuiSaldoSuficiente(int numContaOrigem, double valor);
+        void Transferir(int numContaOrigem, int numContaDestino, double valor);
     }
 }

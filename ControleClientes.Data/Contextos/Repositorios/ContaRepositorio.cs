@@ -23,18 +23,34 @@ namespace ControleClientes.Data.Contextos.Repositorios
             return _unit.Contexto.Set<Conta>().Where(x => x.NumeroConta == numeroConta).FirstOrDefault();
         }
 
-        public void CreditarSaldo(Conta conta, double valor)
+        public bool possuiSaldoSuficiente(int numContaOrigem, double valor)
+        {
+            Conta _conta = _unit.Contexto.Set<Conta>().Where(x => x.NumeroConta == numContaOrigem).FirstOrDefault();
+
+            return _conta.Saldo > valor;
+        }
+
+        public void Transferir(int numContaOrigem, int numContaDestino, double valor)
+        {
+            Conta _contaOrigem = _unit.Contexto.Set<Conta>().Where(x => x.NumeroConta == numContaOrigem).FirstOrDefault();
+            Conta _contaDestino = _unit.Contexto.Set<Conta>().Where(x => x.NumeroConta == numContaDestino).FirstOrDefault();
+
+            CreditarSaldo(_contaDestino, valor);
+            DebitarSaldo(_contaOrigem, valor);
+        }
+
+        private void CreditarSaldo(Conta conta, double valor)
         {
             Conta _conta = _unit.Contexto.Set<Conta>().Where(x => x.NumeroConta == conta.NumeroConta).FirstOrDefault();
-            _conta.Saldo -= valor;
+            _conta.Saldo += valor;
 
             _unit.Save();
         }
 
-        public void DebitarSaldo(Conta conta, double valor)
+        private void DebitarSaldo(Conta conta, double valor)
         {
             Conta _conta = _unit.Contexto.Set<Conta>().Where(x => x.NumeroConta == conta.NumeroConta).FirstOrDefault();
-            _conta.Saldo += valor;
+            _conta.Saldo -= valor;
 
             _unit.Save();
         }

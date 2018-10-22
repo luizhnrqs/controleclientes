@@ -1,0 +1,307 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Edmx Version="3.0" xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <Runtime>
+    <ConceptualModels>
+      <Schema Namespace="ControleClientes.Data.Contextos" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Agencia" customannotation:ClrType="ControleClientes.Dominio.Entidades.Agencia, ControleClientes.Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="IdAgencia" />
+          </Key>
+          <Property Name="IdAgencia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomeAgencia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Endereco" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Cliente" customannotation:ClrType="ControleClientes.Dominio.Entidades.Cliente, ControleClientes.Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PrimeiroNome" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SobreNome" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ativo" Type="Boolean" Nullable="false" />
+          <Property Name="CPF" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Contas" Relationship="Self.Cliente_Contas" FromRole="Cliente_Contas_Source" ToRole="Cliente_Contas_Target" />
+        </EntityType>
+        <EntityType Name="Conta" customannotation:ClrType="ControleClientes.Dominio.Entidades.Conta, ControleClientes.Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="IdConta" />
+          </Key>
+          <Property Name="IdConta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdAgencia" Type="Int32" Nullable="false" />
+          <Property Name="IdCliente" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoConta" Type="Int32" Nullable="false" />
+          <Property Name="NumeroConta" Type="Int32" Nullable="false" />
+          <Property Name="Saldo" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Agencia" Relationship="Self.Conta_Agencia" FromRole="Conta_Agencia_Source" ToRole="Conta_Agencia_Target" />
+          <NavigationProperty Name="Cliente" Relationship="Self.Conta_Cliente" FromRole="Conta_Cliente_Source" ToRole="Conta_Cliente_Target" />
+          <NavigationProperty Name="TipoConta" Relationship="Self.Conta_TipoConta" FromRole="Conta_TipoConta_Source" ToRole="Conta_TipoConta_Target" />
+        </EntityType>
+        <EntityType Name="TipoConta" customannotation:ClrType="ControleClientes.Dominio.Entidades.TipoConta, ControleClientes.Dominio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="IdTipoConta" />
+          </Key>
+          <Property Name="IdTipoConta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomeTipoConta" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="Conta_Agencia">
+          <End Role="Conta_Agencia_Source" Type="Self.Conta" Multiplicity="*" />
+          <End Role="Conta_Agencia_Target" Type="Self.Agencia" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Conta_Agencia_Target">
+              <PropertyRef Name="IdAgencia" />
+            </Principal>
+            <Dependent Role="Conta_Agencia_Source">
+              <PropertyRef Name="IdAgencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Conta_Cliente">
+          <End Role="Conta_Cliente_Source" Type="Self.Conta" Multiplicity="*" />
+          <End Role="Conta_Cliente_Target" Type="Self.Cliente" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Conta_Cliente_Target">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="Conta_Cliente_Source">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Conta_TipoConta">
+          <End Role="Conta_TipoConta_Source" Type="Self.Conta" Multiplicity="*" />
+          <End Role="Conta_TipoConta_Target" Type="Self.TipoConta" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Conta_TipoConta_Target">
+              <PropertyRef Name="IdTipoConta" />
+            </Principal>
+            <Dependent Role="Conta_TipoConta_Source">
+              <PropertyRef Name="IdTipoConta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Cliente_Contas">
+          <End Role="Cliente_Contas_Source" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Cliente_Contas_Target" Type="Self.Conta" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="ControleClienteContexto" customannotation:UseClrTypes="true">
+          <EntitySet Name="Agencia" EntityType="Self.Agencia" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+          <EntitySet Name="Conta" EntityType="Self.Conta" />
+          <EntitySet Name="TipoConta" EntityType="Self.TipoConta" />
+          <AssociationSet Name="Conta_Agencia" Association="Self.Conta_Agencia">
+            <End Role="Conta_Agencia_Source" EntitySet="Conta" />
+            <End Role="Conta_Agencia_Target" EntitySet="Agencia" />
+          </AssociationSet>
+          <AssociationSet Name="Conta_Cliente" Association="Self.Conta_Cliente">
+            <End Role="Conta_Cliente_Source" EntitySet="Conta" />
+            <End Role="Conta_Cliente_Target" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="Conta_TipoConta" Association="Self.Conta_TipoConta">
+            <End Role="Conta_TipoConta_Source" EntitySet="Conta" />
+            <End Role="Conta_TipoConta_Target" EntitySet="TipoConta" />
+          </AssociationSet>
+          <AssociationSet Name="Cliente_Contas" Association="Self.Cliente_Contas">
+            <End Role="Cliente_Contas_Source" EntitySet="Cliente" />
+            <End Role="Cliente_Contas_Target" EntitySet="Conta" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </ConceptualModels>
+    <Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CodeFirstDatabase" CdmEntityContainer="ControleClienteContexto">
+          <EntitySetMapping Name="Agencia">
+            <EntityTypeMapping TypeName="ControleClientes.Data.Contextos.Agencia">
+              <MappingFragment StoreEntitySet="Agencia">
+                <ScalarProperty Name="IdAgencia" ColumnName="IdAgencia" />
+                <ScalarProperty Name="NomeAgencia" ColumnName="NomeAgencia" />
+                <ScalarProperty Name="Endereco" ColumnName="Endereco" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="ControleClientes.Data.Contextos.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="PrimeiroNome" ColumnName="PrimeiroNome" />
+                <ScalarProperty Name="SobreNome" ColumnName="SobreNome" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Ativo" ColumnName="Ativo" />
+                <ScalarProperty Name="CPF" ColumnName="CPF" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Conta">
+            <EntityTypeMapping TypeName="ControleClientes.Data.Contextos.Conta">
+              <MappingFragment StoreEntitySet="Conta">
+                <ScalarProperty Name="IdConta" ColumnName="IdConta" />
+                <ScalarProperty Name="IdAgencia" ColumnName="IdAgencia" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdTipoConta" ColumnName="IdTipoConta" />
+                <ScalarProperty Name="NumeroConta" ColumnName="NumeroConta" />
+                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoConta">
+            <EntityTypeMapping TypeName="ControleClientes.Data.Contextos.TipoConta">
+              <MappingFragment StoreEntitySet="TipoConta">
+                <ScalarProperty Name="IdTipoConta" ColumnName="IdTipoConta" />
+                <ScalarProperty Name="NomeTipoConta" ColumnName="NomeTipoConta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Cliente_Contas" TypeName="ControleClientes.Data.Contextos.Cliente_Contas" StoreEntitySet="Conta">
+            <EndProperty Name="Cliente_Contas_Source">
+              <ScalarProperty Name="IdCliente" ColumnName="Cliente_IdCliente" />
+            </EndProperty>
+            <EndProperty Name="Cliente_Contas_Target">
+              <ScalarProperty Name="IdConta" ColumnName="IdConta" />
+            </EndProperty>
+            <Condition IsNull="false" ColumnName="Cliente_IdCliente" />
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </Mappings>
+    <StorageModels>
+      <Schema Namespace="CodeFirstDatabaseSchema" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Agencia" customannotation:Index="{ }">
+          <Key>
+            <PropertyRef Name="IdAgencia" />
+          </Key>
+          <Property Name="IdAgencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomeAgencia" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Endereco" Type="nvarchar(max)" Nullable="true" />
+        </EntityType>
+        <EntityType Name="Cliente" customannotation:Index="{ }">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PrimeiroNome" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="SobreNome" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Ativo" Type="bit" Nullable="false" />
+          <Property Name="CPF" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Conta" customannotation:Index="{ }">
+          <Key>
+            <PropertyRef Name="IdConta" />
+          </Key>
+          <Property Name="IdConta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdAgencia" Type="int" customannotation:Index="{ Name: IX_IdAgencia, Order: 0 }" Nullable="false" />
+          <Property Name="IdCliente" Type="int" customannotation:Index="{ Name: IX_IdCliente, Order: 0 }" Nullable="false" />
+          <Property Name="IdTipoConta" Type="int" customannotation:Index="{ Name: IX_IdTipoConta, Order: 0 }" Nullable="false" />
+          <Property Name="NumeroConta" Type="int" Nullable="false" />
+          <Property Name="Saldo" Type="float" Nullable="false" />
+          <Property Name="Cliente_IdCliente" Type="int" customannotation:Index="{ Name: IX_Cliente_IdCliente, Order: 0 }" Nullable="true" />
+        </EntityType>
+        <EntityType Name="TipoConta" customannotation:Index="{ }">
+          <Key>
+            <PropertyRef Name="IdTipoConta" />
+          </Key>
+          <Property Name="IdTipoConta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomeTipoConta" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="Conta_Agencia">
+          <End Role="Agencia" Type="Self.Agencia" Multiplicity="1" />
+          <End Role="Conta" Type="Self.Conta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agencia">
+              <PropertyRef Name="IdAgencia" />
+            </Principal>
+            <Dependent Role="Conta">
+              <PropertyRef Name="IdAgencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Conta_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Conta" Type="Self.Conta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="Conta">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Conta_TipoConta">
+          <End Role="TipoConta" Type="Self.TipoConta" Multiplicity="1" />
+          <End Role="Conta" Type="Self.Conta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoConta">
+              <PropertyRef Name="IdTipoConta" />
+            </Principal>
+            <Dependent Role="Conta">
+              <PropertyRef Name="IdTipoConta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Cliente_Contas">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Conta" Type="Self.Conta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="Conta">
+              <PropertyRef Name="Cliente_IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CodeFirstDatabase">
+          <EntitySet Name="Agencia" EntityType="Self.Agencia" Schema="dbo" Table="Agencia" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" Table="Cliente" />
+          <EntitySet Name="Conta" EntityType="Self.Conta" Schema="dbo" Table="Conta" />
+          <EntitySet Name="TipoConta" EntityType="Self.TipoConta" Schema="dbo" Table="TipoConta" />
+          <AssociationSet Name="Conta_Agencia" Association="Self.Conta_Agencia">
+            <End Role="Agencia" EntitySet="Agencia" />
+            <End Role="Conta" EntitySet="Conta" />
+          </AssociationSet>
+          <AssociationSet Name="Conta_Cliente" Association="Self.Conta_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Conta" EntitySet="Conta" />
+          </AssociationSet>
+          <AssociationSet Name="Conta_TipoConta" Association="Self.Conta_TipoConta">
+            <End Role="TipoConta" EntitySet="TipoConta" />
+            <End Role="Conta" EntitySet="Conta" />
+          </AssociationSet>
+          <AssociationSet Name="Cliente_Contas" Association="Self.Cliente_Contas">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Conta" EntitySet="Conta" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </StorageModels>
+  </Runtime>
+  <Designer>
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="ProcessDependentTemplatesOnSave" Value="False" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <Diagrams >
+      <Diagram DiagramId="176324266ef440a9841bc94a16dd94fc" Name="Diagram1">
+        <EntityTypeShape EntityType="ControleClientes.Data.Contextos.Agencia" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ControleClientes.Data.Contextos.Cliente" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ControleClientes.Data.Contextos.Conta" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ControleClientes.Data.Contextos.TipoConta" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <AssociationConnector Association="ControleClientes.Data.Contextos.Conta_Agencia" ManuallyRouted="false" />
+        <AssociationConnector Association="ControleClientes.Data.Contextos.Conta_Cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="ControleClientes.Data.Contextos.Conta_TipoConta" ManuallyRouted="false" />
+        <AssociationConnector Association="ControleClientes.Data.Contextos.Cliente_Contas" ManuallyRouted="false" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</Edmx>

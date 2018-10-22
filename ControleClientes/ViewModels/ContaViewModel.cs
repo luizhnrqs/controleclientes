@@ -19,5 +19,6 @@ namespace ControleClientes.ViewModels
         public string TipoConta { get; set; }
         [DisplayName("Saldo em Conta")]
         public double Saldo { get; set; }
+        public string NumeroContaCliente { get => $"{NumeroConta} - {NomeCliente}"; }
     }
 }

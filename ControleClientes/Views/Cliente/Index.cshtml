@@ -1,26 +1,20 @@
 ﻿@model IEnumerable<ControleClientes.ViewModels.ClienteViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Clientes";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Clientes</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Criar Novo Cliente", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Nome)
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.PrimeiroNome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SobreNome)
-        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Email)
         </th>
@@ -35,12 +29,6 @@
         <td>
             @Html.DisplayFor(modelItem => item.Nome)
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.PrimeiroNome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SobreNome)
-        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.Email)
         </td>
@@ -48,9 +36,9 @@
             @Html.DisplayFor(modelItem => item.CPF)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdCliente }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdCliente }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdCliente })
+            @Html.ActionLink("Editar", "Edit", new { id=item.IdCliente }) |
+            @Html.ActionLink("Detalhes", "Details", new { id=item.IdCliente }) |
+            @Html.ActionLink("Remover", "Delete", new { id=item.IdCliente })
         </td>
     </tr>
 }

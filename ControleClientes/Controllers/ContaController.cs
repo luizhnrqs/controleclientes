@@ -35,5 +35,42 @@ namespace ControleClientes.Controllers
 
             return View(contaViewModel);
         }
+
+        // GET: Conta/Transferir/5
+        public ActionResult Transferir(int numeroConta)
+        {
+            var conta = _contaApp.BuscarPorNumeroConta(numeroConta);
+            var contaViewModel = Mapper.Map<Conta, ContaViewModel>(conta);
+
+            var listaContas = _contaApp.List().ToList();
+            listaContas.Remove(conta);
+
+            ViewBag.ListaContas = new SelectList(Mapper.Map<List<ContaViewModel>>(listaContas), "NumeroConta", "NumeroContaCliente");
+
+            return View(contaViewModel);
+        }
+
+        // POST: Conta/Transferir/
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Transferir(FormCollection form)
+        {
+            try
+            {
+                var numContaOrigem = form["NumeroConta"];
+                var numContaDestino = form["ContaDestino"];
+                var valor = Convert.ToDouble(form["Valor"]);
+
+                _contaApp.Transferir(numContaOrigem, numContaDestino, valor);
+
+                TempData["Sucesso"] = $"Transferência no valor de {valor} entre a conta {numContaOrigem} e {numContaDestino} realizada com sucesso!";
+            }
+            catch(Exception ex)
+            {
+                TempData["Erro"] = ex.Message;
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }

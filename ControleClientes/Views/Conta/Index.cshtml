@@ -1,11 +1,25 @@
 ﻿@model IEnumerable<ControleClientes.ViewModels.ContaViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Conta";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Contas</h2>
+
+@if (TempData["Erro"] != null)
+{
+    <p class="alert-danger">
+        @TempData["Erro"]
+    </p>
+}
+
+@if (TempData["Sucesso"] != null)
+{
+    <p class="alert-success">
+        @TempData["Sucesso"]
+    </p>
+}
 
 <table class="table">
     <tr>
@@ -24,24 +38,26 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumeroConta)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NomeCliente)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TipoConta)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Saldo)
-        </td>
-        <td>
-            @Html.ActionLink("Detalhes", "Details", new { numeroConta = item.NumeroConta })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroConta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeCliente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoConta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Saldo)
+            </td>
+            <td>
+                @Html.ActionLink("Detalhes", "Details", new { numeroConta = item.NumeroConta }) |
+                @Html.ActionLink("Transferir entre contas", "Transferir", new { numeroConta = item.NumeroConta })
+            </td>
+        </tr>
+    }
 
 </table>

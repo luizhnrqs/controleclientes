@@ -10,5 +10,6 @@ namespace ControleClientes.Aplicacao.Interfaces
     public interface IContaApp : IBaseApp<Conta>
     {
         Conta BuscarPorNumeroConta(int numeroConta);
+        void Transferir(string numContaOrigem, string numContaDestino, double valor);
     }
 }

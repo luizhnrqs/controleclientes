@@ -1,0 +1,70 @@
+﻿@model ControleClientes.ViewModels.ContaViewModel
+
+@{
+    ViewBag.Title = "Transferência entre Contas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Transferir</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.NumeroConta)
+
+<div class="form-horizontal">
+    <h4>Cliente</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <label class="col-md-2 control-label">Nome do Cliente</label>
+        <div class="col-md-10">
+            <label class="control-label">@Model.NomeCliente</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-2 control-label">Número da Conta</label>
+        <div class="col-md-10">
+            <label class="control-label">@Model.NumeroConta</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-2 control-label">Saldo Disponível</label>
+        <div class="col-md-10">
+            <label class="control-label">@Model.Saldo</label>
+        </div>
+    </div>
+
+    <hr/>
+
+    <div class="form-group">
+        <label class="col-md-2 control-label">Selecione uma Conta para transferir</label>
+        <div class="col-md-10">
+            @Html.DropDownList("ContaDestino", new List<SelectListItem>(ViewBag.ListaContas), new { id = "ContaDestino", @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-2 control-label">Valor de Transferência</label>
+        <div class="col-md-10">
+            <input type="text" name="Valor" required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Transferir" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Voltar para Lista", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
