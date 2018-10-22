@@ -19,9 +19,9 @@ namespace ControleClientes.Controllers
         // GET: Cliente
         public ActionResult Index()
         {
-            var clienteViewModel = Mapper.Map<IEnumerable<Cliente>, IEnumerable<ClienteViewModel>>(_clienteApp.List());
+            var _clienteViewModel = Mapper.Map<IEnumerable<Cliente>, IEnumerable<ClienteViewModel>>(_clienteApp.List());
 
-            return View(clienteViewModel);
+            return View(_clienteViewModel);
         }
 
         // GET: Cliente/Details/5

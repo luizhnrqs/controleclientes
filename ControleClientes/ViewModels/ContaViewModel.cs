@@ -11,6 +11,9 @@ namespace ControleClientes.ViewModels
     {
         [Key]
         public int IdConta { get; set; }
+        public int IdCliente { get; set; }
+        public int IdTipoConta { get; set; }
+        public int IdAgencia { get; set; }
         [DisplayName("Número da Conta")]
         public int NumeroConta { get; set; }
         [DisplayName("Nome do Cliente")]

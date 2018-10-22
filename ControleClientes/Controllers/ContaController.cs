@@ -13,10 +13,16 @@ namespace ControleClientes.Controllers
     public class ContaController : Controller
     {
         private readonly IContaApp _contaApp;
+        private readonly ITipoContaApp _tipoContaApp;
+        private readonly IClienteApp _clienteApp;
+        private readonly IAgenciaApp _agenciaApp;
 
-        public ContaController(IContaApp contaApp)
+        public ContaController(IContaApp contaApp, ITipoContaApp tipoContaApp, IClienteApp clienteApp, IAgenciaApp agenciaApp)
         {
             _contaApp = contaApp;
+            _tipoContaApp = tipoContaApp;
+            _clienteApp = clienteApp;
+            _agenciaApp = agenciaApp;
         }
 
         // GET: Conta
@@ -34,6 +40,33 @@ namespace ControleClientes.Controllers
             var contaViewModel = Mapper.Map<Conta, ContaViewModel>(conta);
 
             return View(contaViewModel);
+        }
+
+        // GET: Cliente/Create
+        public ActionResult Create()
+        {
+            ViewBag.TipoContasList = new SelectList(Mapper.Map<List<TipoContaViewModel>>(_tipoContaApp.List().ToList()), "IdTipoConta", "NomeTipoConta");
+            ViewBag.ClientesList = new SelectList(Mapper.Map<List<ClienteViewModel>>(_clienteApp.List().ToList()), "IdCliente", "Nome");
+            ViewBag.AgenciasList = new SelectList(Mapper.Map<List<AgenciaViewModel>>(_agenciaApp.List().ToList()), "IdAgencia", "NomeAgencia");
+
+            return View();
+        }
+
+        // POST: Cliente/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(ContaViewModel conta)
+        {
+            if (ModelState.IsValid)
+            {
+                var _clienteDomain = Mapper.Map<ContaViewModel, Conta>(conta);
+
+                _contaApp.Add(_clienteDomain);
+
+                return RedirectToAction("Index");
+            }
+
+            return View(conta);
         }
 
         // GET: Conta/Transferir/5
