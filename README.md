@@ -1,6 +1,6 @@
 # controleclientecog
 
-Sistema de controle de clientes desenvolvido para teste na Cognizant.
+Sistema de controle de clientes desenvolvido para um teste.
 
 Observação, executar o comando 
 ```Update-Database –Verbose```
