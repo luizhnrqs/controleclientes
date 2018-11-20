@@ -62,4 +62,4 @@
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
 
-ControleClientes/Scripts* linguist-vendored
+ControleClientes/Scripts/* linguist-vendored
