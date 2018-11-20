@@ -1,4 +1,4 @@
-# controleclientecog
+# controle clientes
 
 Sistema de controle de clientes desenvolvido para um teste.
 
