@@ -2,6 +2,11 @@
 
 Sistema de controle de clientes desenvolvido para um teste.
 
+- ASP.NET MVC
+- SOLID Principles
+- EntityFramework
+- AutoMapper
+
 Observação, executar o comando 
 ```Update-Database –Verbose```
 no Package Manager Console do Visual Studio para criar e restaurar a base de dados da aplicação. 
